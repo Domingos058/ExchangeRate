@@ -11,11 +11,13 @@ import { Rate } from 'src/app/core/models/rate';
 })
 export class ShowRateComponent implements OnInit {
   rate$!: Observable<Rate[]>;
-  dtGridViewProvinceSelectedRow: any;
+  rates!: Rate;
+  teste1: any
+  dtGridViewRateSelectedRow: any;
 
-  dtGridViewProvince: GridOptions = {
+  dtGridViewRate: GridOptions = {
     columnDefs: [
-      { headerName: 'Nome', field: 'rates', sortable: true, filter: true }
+      { headerName: 'Nome', field: 'base_code', sortable: true, filter: true }
     ],
     defaultColDef: {
       flex: 1,
@@ -34,6 +36,18 @@ export class ShowRateComponent implements OnInit {
   // Properties
   list() {
     this.rate$ = this.rateService.list();
-    console.log('Cambiois',this.rate$)
+    this.rate$.subscribe(data=>{
+      console.log(data)
+      // @ts-ignore
+      this.rates = data
+      console.log('teste', this.rates.rates)
+      this.teste(this.rates.rates.name)
+    });
+  }
+
+  teste(rates: any)
+  {
+    this.teste1= rates
+      console.log(this.teste1)
   }
 }

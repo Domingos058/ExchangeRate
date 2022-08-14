@@ -1,0 +1,33 @@
+<app-nav></app-nav>
+
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+
+        <app-sidebar></app-sidebar>
+    </div>
+
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-2">
+                <h2 class="mt-2">Dolar</h2>
+
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <app-show-rate></app-show-rate>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+        <footer class="py-4 bg-light mt-auto">
+            <div class="container-fluid px-4">
+                <div class="d-flex align-items-center justify-content-between small">
+                    <div class="text-muted">Estado do sistema:</div>
+                    <div>
+                        Data do servidor: <strong> {{ today | date: 'fullDate' }} </strong>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>

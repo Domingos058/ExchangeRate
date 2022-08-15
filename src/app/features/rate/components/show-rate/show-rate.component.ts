@@ -14,16 +14,18 @@ export class ShowRateComponent implements OnInit {
   rates!: Rate;
   dtGridViewRateSelectedRow: any;
 
-  dtGridViewRate: GridOptions = {
+
+  //grid to displays currencys
+  /*dtGridViewRate: GridOptions = {
     columnDefs: [
-      { headerName: 'Nome', field: 'rates', sortable: true, filter: true }
+      { headerName: 'Nome', field: 'rates.rates', sortable: true, filter: true }
     ],
     defaultColDef: {
       flex: 1,
       editable: false,
       resizable: true,
     }
-  }
+  }*/
   constructor(private rateService: RateService) {
   }
 
@@ -36,14 +38,28 @@ export class ShowRateComponent implements OnInit {
   list() {
     this.rate$ = this.rateService.list();
     this.rate$.subscribe(data=>{
-      console.log(data)
       // @ts-ignore
       this.rates = data
-      this.rates.rates
       console.log('teste', this.rates.rates)
+      //this.expand(this.rates.rates)
       });
+
+    
       
   }
 
+  //transforming the double object into an array to displays hes properties 
+  expand(data: any): string[] {
+    let stringArr: any[] = [];
+    for (const prop in data) {
+      data[prop] instanceof Object
+        ? (stringArr = stringArr.concat([`${prop}: `]).concat(this.expand(data[prop])))
+        : stringArr.push(`${prop}: ${data[prop]}`);
+    }
+    return stringArr;
+  }
+
 }
+
+
 
